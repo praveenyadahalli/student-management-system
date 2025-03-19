@@ -1,19 +1,10 @@
 package com.student.management.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.student.management.entity.Student;
+import com.student.management.dto.StudentDTO;
 import com.student.management.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/students")
@@ -23,22 +14,22 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping
-    public Student admitStudent(@RequestBody Student student) {
-        return studentService.admitStudent(student);
+    public StudentDTO admitStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.admitStudent(studentDTO);
     }
 
     @GetMapping("/search")
-    public List<Student> getStudentsByName(@RequestParam String name) {
+    public List<StudentDTO> getStudentsByName(@RequestParam String name) {
         return studentService.getStudentsByName(name);
     }
 
     @PutMapping("/{id}")
-    public Student updateStudentProfile(@PathVariable Long id, @RequestBody Student updatedStudent) {
+    public StudentDTO updateStudentProfile(@PathVariable Long id, @RequestBody StudentDTO updatedStudent) {
         return studentService.updateStudentProfile(id, updatedStudent);
     }
 
     @GetMapping("/course/{courseId}")
-    public List<Student> getStudentsByCourse(@PathVariable Long courseId) {
+    public List<StudentDTO> getStudentsByCourse(@PathVariable Long courseId) {
         return studentService.getStudentsByCourse(courseId);
     }
 }

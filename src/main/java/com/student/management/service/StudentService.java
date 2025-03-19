@@ -1,12 +1,11 @@
 package com.student.management.service;
 
+import com.student.management.dto.StudentDTO;
 import java.util.List;
 
-import com.student.management.entity.Student;
-
 public interface StudentService {
-    Student admitStudent(Student student);
-    List<Student> getStudentsByName(String name);
-    Student updateStudentProfile(Long id, Student updatedStudent);
-    List<Student> getStudentsByCourse(Long courseId);
+    StudentDTO admitStudent(StudentDTO studentDTO);
+    List<StudentDTO> getStudentsByName(String name);
+    StudentDTO updateStudentProfile(Long id, StudentDTO updatedStudent);
+    List<StudentDTO> getStudentsByCourse(Long courseId);
 }

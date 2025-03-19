@@ -2,6 +2,7 @@ package com.student.management.service;
 
 import com.student.management.dto.StudentDTO;
 import com.student.management.entity.Student;
+import com.student.management.helper.StudentHelper;
 import com.student.management.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,18 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private ModelMapper modelMapper;
+    
+    @Autowired
+    private StudentHelper studentHelper;
 
     @Override
     public StudentDTO admitStudent(StudentDTO studentDTO) {
         // Convert DTO to Entity
         Student student = modelMapper.map(studentDTO, Student.class);
+
+        // Generate a unique student code using the helper
+        String uniqueStudentCode = studentHelper.generateUniqueStudentCode();
+        student.setUniqueStudentCode(uniqueStudentCode);
 
         // Save the entity
         Student savedStudent = studentRepository.save(student);
